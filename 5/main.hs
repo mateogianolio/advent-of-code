@@ -9,7 +9,6 @@ escape n xs = n < 0 || n + 1 > length xs
 jump :: Int -> Int -> V.Vector Int -> Int
 jump n step xs
   | escape n xs  = step
-  | x == 0       = jump n (step + 1) (V.update xs (V.fromList [(n, value)]))
   | otherwise    = jump (n + x) (step + 1) (V.update xs (V.fromList [(n, value)]))
   where
     x = xs V.! n
@@ -18,7 +17,6 @@ jump n step xs
 jumpSlow :: Int -> Int -> V.Vector Int -> Int
 jumpSlow n step xs
   | escape n xs  = step
-  | x == 0       = jumpSlow n (step + 1) (V.update xs (V.fromList [(n, value)]))
   | otherwise    = jumpSlow (n + x) (step + 1) (V.update xs (V.fromList [(n, value)]))
   where
     x = xs V.! n
