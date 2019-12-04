@@ -7,35 +7,35 @@ fn main() -> io::Result<()> {
 
   handle.read_to_string(&mut input)?;
 
-  let mut list: Vec<usize> = input
+  let mut memory: Vec<usize> = input
     .split(",")
     .map(|x| x.parse::<usize>().unwrap())
     .collect();
   
-  list[1] = 12usize;
-  list[2] = 2usize;
+  memory[1] = 12usize;
+  memory[2] = 2usize;
   
   let mut i = 0usize;
   loop {
     let mut pos;
-    let op = list[i];
+    let op = memory[i];
     match op {
       1 => {
-        pos = list[i + 1usize];
-        let lhs = list[pos];
-        pos = list[i + 2usize];
-        let rhs = list[pos];
-        pos = list[i + 3usize];
-        list[pos] = lhs + rhs;
+        pos = memory[i + 1usize];
+        let lhs = memory[pos];
+        pos = memory[i + 2usize];
+        let rhs = memory[pos];
+        pos = memory[i + 3usize];
+        memory[pos] = lhs + rhs;
         i += 4;
       },
       2 => {
-        pos = list[i + 1usize];
-        let lhs = list[pos];
-        pos = list[i + 2usize];
-        let rhs = list[pos];
-        pos = list[i + 3usize];
-        list[pos] = lhs * rhs;
+        pos = memory[i + 1usize];
+        let lhs = memory[pos];
+        pos = memory[i + 2usize];
+        let rhs = memory[pos];
+        pos = memory[i + 3usize];
+        memory[pos] = lhs * rhs;
         i += 4;
       },
       99 => break,
@@ -43,7 +43,7 @@ fn main() -> io::Result<()> {
     }
   }
 
-  println!("{}", list[0]);
+  println!("{}", memory[0]);
 
   Ok(())
 }
