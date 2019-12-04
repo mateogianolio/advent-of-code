@@ -15,23 +15,31 @@ fn main() -> io::Result<()> {
   list[1] = 12usize;
   list[2] = 2usize;
   
-  for i in (0..list.len()).step_by(4) {
+  let mut i = 0usize;
+  loop {
+    let mut pos;
     let op = list[i];
-    if op == 99usize {
-      break;
-    }
-
-    let j = list[i + 1usize];
-    let k = list[i + 2usize];
-    let l = list[i + 3usize];
-
-    let lhs = list[j];
-    let rhs = list[k];
-
-    if list[i] == 1usize {
-      list[l] = lhs + rhs;
-    } else if list[i] == 2usize {
-      list[l] = lhs * rhs;
+    match op {
+      1 => {
+        pos = list[i + 1usize];
+        let lhs = list[pos];
+        pos = list[i + 2usize];
+        let rhs = list[pos];
+        pos = list[i + 3usize];
+        list[pos] = lhs + rhs;
+        i += 4;
+      },
+      2 => {
+        pos = list[i + 1usize];
+        let lhs = list[pos];
+        pos = list[i + 2usize];
+        let rhs = list[pos];
+        pos = list[i + 3usize];
+        list[pos] = lhs * rhs;
+        i += 4;
+      },
+      99 => break,
+      _ => panic!("Something went wrong!"),
     }
   }
 
